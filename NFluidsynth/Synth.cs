@@ -41,10 +41,10 @@ namespace NFluidsynth
         public void NoteOff(int channel, int key)
         {
             ThrowIfDisposed();
-            // not sure if we should always raise exception, it seems that it also returns FLUID_FAILED for not-on-state note.
             if (LibFluidsynth.fluid_synth_noteoff(Handle, channel, key) != 0)
             {
-                OnError("noteoff operation failed");
+                // Ignore error
+                // OnError("noteoff operation failed");
             }
         }
 

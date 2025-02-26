@@ -5,12 +5,12 @@
     <Copyright>atsushi</Copyright>
     <Authors>atsushi</Authors>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <Version>0.2.0</Version>
     <Description>.NET binding to Fluidsynth.</Description>
     <PackageProjectUrl>https://github.com/space-wizards/nfluidsynth</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <TargetFrameworks>net472;netcoreapp3.1;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net8.0;net8.0-windows</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0">

@@ -44,8 +44,8 @@ namespace NFluidsynth.Native
         [DllImport(LibraryName)]
         internal static extern int fluid_synth_sysex(fluid_synth_t_ptr synth, byte* data,
             int len, byte* response,
-            ref int response_len, [MarshalAs(UnmanagedType.I4)] out bool handled,
-            [MarshalAs(UnmanagedType.I4)] bool dryrun);
+            ref int response_len, [MarshalAs(UnmanagedType.I1)] out bool handled,
+            [MarshalAs(UnmanagedType.I1)] bool dryrun);
 
         [DllImport(LibraryName)]
         internal static extern int fluid_synth_pitch_bend(fluid_synth_t_ptr synth, int chan, int val);
@@ -284,8 +284,8 @@ namespace NFluidsynth.Native
 
         [DllImport(LibraryName)]
         internal static extern int fluid_synth_process(fluid_synth_t_ptr synth,
-            int len, int nin, float** in_ignored,
-            int nout, float** outBuffer);
+            int len, int nout1, float** outFxBuffer,
+            int nout2, float** outBuffer);
 
         [DllImport(LibraryName)]
         internal static extern void fluid_synth_add_sfloader(fluid_synth_t_ptr synth, fluid_sfloader_t_ptr loader);

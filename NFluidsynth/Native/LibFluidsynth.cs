@@ -20,6 +20,21 @@ namespace NFluidsynth.Native
                     IntPtr handle;
                     if (name == LibraryName)
                     {
+                        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                        {
+                            if (NativeLibrary.TryLoad("libfluidsynth-3.dll", assembly, path, out handle))
+                                return handle;
+
+                            if (NativeLibrary.TryLoad("libfluidsynth-2.dll", assembly, path, out handle))
+                                return handle;
+
+                            if (NativeLibrary.TryLoad("libfluidsynth.dll", assembly, path, out handle))
+                                return handle;
+
+                            if (NativeLibrary.TryLoad("fluidsynth.dll", assembly, path, out handle))
+                                return handle;
+                        }
+
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                         {
                             // Assumption here is that this binds against whatever API .2 is,
