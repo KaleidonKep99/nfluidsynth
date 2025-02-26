@@ -34,7 +34,8 @@ namespace NFluidsynth
             ThrowIfDisposed();
             if (LibFluidsynth.fluid_synth_noteon(Handle, channel, key, vel) != 0)
             {
-                OnError("noteon operation failed");
+                // Ignore error
+                // OnError("noteon operation failed");
             }
         }
 
@@ -53,7 +54,8 @@ namespace NFluidsynth
             ThrowIfDisposed();
             if (LibFluidsynth.fluid_synth_cc(Handle, channel, num, val) != 0)
             {
-                OnError("control change operation failed");
+                // Ignore error
+                // OnError("control change operation failed");
             }
         }
 
@@ -186,7 +188,7 @@ namespace NFluidsynth
             }
         }
 
-        public void SoundFontSelect(int channel, uint soundFontId)
+        public void SoundFontSelect(int channel, int soundFontId)
         {
             ThrowIfDisposed();
 
@@ -196,7 +198,7 @@ namespace NFluidsynth
             }
         }
 
-        public void ProgramSelect(int channel, uint soundFontId, uint bank, uint preset)
+        public void ProgramSelect(int channel, int soundFontId, uint bank, uint preset)
         {
             ThrowIfDisposed();
 
@@ -261,24 +263,24 @@ namespace NFluidsynth
         // Then fluid_synth_start() takes fluid_preset_t* which is returned only by this deprecated function, so I don't bind it either.
         // Then fluid_synth_stop() is paired by the function above, so I don't bind it either.
 
-        public uint LoadSoundFont(string filename, bool resetPresets)
+        public int LoadSoundFont(string filename, bool resetPresets)
         {
             ThrowIfDisposed();
             int result = LibFluidsynth.fluid_synth_sfload(Handle, filename, resetPresets);
             if (result < 0)
                 OnError("sound font load operation failed");
 
-            return (uint) result;
+            return result;
         }
 
-        public void ReloadSoundFont(uint id)
+        public void ReloadSoundFont(int id)
         {
             ThrowIfDisposed();
             if (LibFluidsynth.fluid_synth_sfreload(Handle, id) != 0)
                 OnError("sound font reload operation failed");
         }
 
-        public void UnloadSoundFont(uint id, bool resetPresets)
+        public void UnloadSoundFont(int id, bool resetPresets)
         {
             ThrowIfDisposed();
             if (LibFluidsynth.fluid_synth_sfunload(Handle, id, resetPresets) != 0)
@@ -865,6 +867,12 @@ namespace NFluidsynth
             }
 
             return true;
+        }
+
+        public int AllSoundsOff(int channel)
+        {
+            ThrowIfDisposed();
+            return LibFluidsynth.fluid_synth_all_sounds_off(Handle, channel);
         }
 
         public int AllNotesOff(int channel)

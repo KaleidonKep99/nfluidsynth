@@ -72,10 +72,10 @@ namespace NFluidsynth.Native
         internal static extern int fluid_synth_bank_select(fluid_synth_t_ptr synth, int chan, uint bank);
 
         [DllImport(LibraryName)]
-        internal static extern int fluid_synth_sfont_select(fluid_synth_t_ptr synth, int chan, uint sfont_id);
+        internal static extern int fluid_synth_sfont_select(fluid_synth_t_ptr synth, int chan, int sfont_id);
 
         [DllImport(LibraryName)]
-        internal static extern int fluid_synth_program_select(fluid_synth_t_ptr synth, int chan, uint sfont_id,
+        internal static extern int fluid_synth_program_select(fluid_synth_t_ptr synth, int chan, int sfont_id,
             uint bank_num, uint preset_num);
 
         [DllImport(LibraryName)]
@@ -110,10 +110,10 @@ namespace NFluidsynth.Native
             [MarshalAs(LP_Str)] string filename, bool reset_presets);
 
         [DllImport(LibraryName)]
-        internal static extern int fluid_synth_sfreload(fluid_synth_t_ptr synth, uint id);
+        internal static extern int fluid_synth_sfreload(fluid_synth_t_ptr synth, int id);
 
         [DllImport(LibraryName)]
-        internal static extern int fluid_synth_sfunload(fluid_synth_t_ptr synth, uint id, bool reset_presets);
+        internal static extern int fluid_synth_sfunload(fluid_synth_t_ptr synth, int id, bool reset_presets);
 
         [DllImport(LibraryName)]
         internal static extern int fluid_synth_add_sfont(fluid_synth_t_ptr synth, fluid_sfont_t_ptr sfont);
@@ -137,10 +137,10 @@ namespace NFluidsynth.Native
             [MarshalAs(LP_Str)] string name);
 
         [DllImport(LibraryName)]
-        internal static extern int fluid_synth_set_bank_offset(fluid_synth_t_ptr synth, int sfont_id, int offset);
+        internal static extern int fluid_synth_set_bank_offset(fluid_synth_t_ptr synth, int id, int offset);
 
         [DllImport(LibraryName)]
-        internal static extern int fluid_synth_get_bank_offset(fluid_synth_t_ptr synth, int sfont_id);
+        internal static extern int fluid_synth_get_bank_offset(fluid_synth_t_ptr synth, int id);
 
         [DllImport(LibraryName)]
         internal static extern int fluid_synth_set_reverb(fluid_synth_t_ptr synth, double roomsize, double damping,
@@ -307,5 +307,8 @@ namespace NFluidsynth.Native
 
         [DllImport(LibraryName)]
         internal static extern int fluid_synth_all_notes_off(fluid_synth_t_ptr synth, int channel);
+
+        [DllImport(LibraryName)]
+        internal static extern int fluid_synth_all_sounds_off(fluid_synth_t_ptr synth, int channel);
     }
 }
