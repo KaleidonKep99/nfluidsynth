@@ -32,31 +32,22 @@ namespace NFluidsynth
         public void NoteOn(int channel, int key, int vel)
         {
             ThrowIfDisposed();
-            if (LibFluidsynth.fluid_synth_noteon(Handle, channel, key, vel) != 0)
-            {
-                // Ignore error
-                // OnError("noteon operation failed");
-            }
+            LibFluidsynth.fluid_synth_noteon(Handle, channel, key, vel);
         }
 
         public void NoteOff(int channel, int key)
         {
             ThrowIfDisposed();
-            if (LibFluidsynth.fluid_synth_noteoff(Handle, channel, key) != 0)
-            {
-                // Ignore error
-                // OnError("noteoff operation failed");
-            }
+            LibFluidsynth.fluid_synth_noteoff(Handle, channel, key);
         }
 
-        public void CC(int channel, int num, int val)
+        public bool CC(int channel, int num, int val)
         {
             ThrowIfDisposed();
             if (LibFluidsynth.fluid_synth_cc(Handle, channel, num, val) != 0)
-            {
-                // Ignore error
-                // OnError("control change operation failed");
-            }
+                return false;
+
+            return true;
         }
 
         public int GetCC(int channel, int num)
